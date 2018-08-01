@@ -10,18 +10,26 @@ import Styles from "./styles.m.css";
 import { store } from "../../init/store";
 
 // Actions
-import { showPreviousPhoto } from "../../bus/gallery/actions";
-import { showNextPhoto } from "../../bus/gallery/actions";
+import {
+    showPreviousPhoto,
+    showNextPhoto,
+    showSelectedPhoto
+} from "../../bus/gallery/actions";
 
 @hot(module)
 export default class Gallery extends Component {
     _showPreviousPhoto = () => {
-        store.dispatch(showPreviousPhoto);
+        store.dispatch(showPreviousPhoto());
         this.forceUpdate();
     };
 
     _showNextPhoto = () => {
-        store.dispatch(showNextPhoto);
+        store.dispatch(showNextPhoto());
+        this.forceUpdate();
+    };
+
+    _showSelectedPhoto = (event) => {
+        store.dispatch(showSelectedPhoto(event.target.value));
         this.forceUpdate();
     };
 
@@ -50,16 +58,28 @@ export default class Gallery extends Component {
                 <img src = { photo.url } />
                 <div>
                     <button onClick = { this._showPreviousPhoto }>←</button>
-                    <button className = { buttonActiveStyle1 } value = '0'>
+                    <button
+                        className = { buttonActiveStyle1 }
+                        value = '0'
+                        onClick = { this._showSelectedPhoto }>
                         1
                     </button>
-                    <button className = { buttonActiveStyle2 } value = '1'>
+                    <button
+                        className = { buttonActiveStyle2 }
+                        value = '1'
+                        onClick = { this._showSelectedPhoto }>
                         2
                     </button>
-                    <button className = { buttonActiveStyle3 } value = '2'>
+                    <button
+                        className = { buttonActiveStyle3 }
+                        value = '2'
+                        onClick = { this._showSelectedPhoto }>
                         3
                     </button>
-                    <button className = { buttonActiveStyle4 } value = '3'>
+                    <button
+                        className = { buttonActiveStyle4 }
+                        value = '3'
+                        onClick = { this._showSelectedPhoto }>
                         4
                     </button>
                     <button onClick = { this._showNextPhoto }>→</button>
