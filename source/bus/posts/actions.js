@@ -1,5 +1,10 @@
 // Types
-import { FETCH_POSTS_ASYNC, FILL_POSTS, CREATE_POST_ASYNC, CREATE_POST } from "./types";
+import {
+    FETCH_POSTS_ASYNC,
+    FILL_POSTS,
+    CREATE_POST_ASYNC,
+    CREATE_POST
+} from "./types";
 
 // Instruments
 import { api } from "../../REST";
@@ -29,13 +34,9 @@ export const createPost = (post) => {
     };
 };
 
-export const createPostAsync = (comment) => async (dispatch) => {
-    dispatch({
-        type: CREATE_POST_ASYNC,
-    });
-
-    const response = await api.posts.create(comment);
-    const result = await response.json();
-
-    dispatch(createPost(result.data));
+export const createPostAsync = (comment) => {
+    return {
+        type:    CREATE_POST_ASYNC,
+        payload: comment,
+    };
 };
