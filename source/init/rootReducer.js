@@ -2,10 +2,12 @@
 import { combineReducers } from "redux";
 
 // Reducers
-import { postsReducer as posts } from "../bus/posts/reducer";
+import { authReducer as auth } from "../bus/auth/reducer";
 import { uiReducer as ui } from "../bus/ui/reducer";
+import { postsReducer as posts } from "../bus/posts/reducer";
 
 export const rootReducer = combineReducers({
-    posts,
+    auth,
     ui,
+    posts,
 });

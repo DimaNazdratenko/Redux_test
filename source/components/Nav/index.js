@@ -1,20 +1,26 @@
 // Core
-import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
-import cx from 'classnames';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import cx from "classnames";
 
 // Instruments
-import Styles from './styles.m.css';
-import { book } from '../../navigation/book';
-import { mockedProfile } from '../../instruments/mockedData';
+import Styles from "./styles.m.css";
+import { book } from "../../navigation/book";
+import { mockedProfile } from "../../instruments/mockedData";
 
-@withRouter
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.auth.get("isAuthenticated"),
+    };
+};
+
+@connect(mapStateToProps)
 export default class Nav extends Component {
     static defaultProps = {
         // State
-        profile:         mockedProfile,
-        isAuthenticated: true,
-        isOnline:        false,
+        profile:  mockedProfile,
+        isOnline: false,
 
         // Actions
         logoutAsync: () => {},
@@ -23,12 +29,12 @@ export default class Nav extends Component {
     _getNav = () => {
         const { isAuthenticated, profile } = this.props;
 
-        return isAuthenticated ?
+        return isAuthenticated ? (
             <>
                 <div>
                     <NavLink activeClassName = { Styles.active } to = { book.profile }>
-                        <img src = { profile.get('avatar') } />
-                        {profile.get('firstName')}
+                        <img src = { profile.get("avatar") } />
+                        {profile.get("firstName")}
                     </NavLink>
                     <NavLink activeClassName = { Styles.active } to = { book.feed }>
                         Стена
@@ -36,7 +42,7 @@ export default class Nav extends Component {
                 </div>
                 <button onClick = { this._logout }>Выйти</button>
             </>
-            :
+        ) : (
             <>
                 <div>
                     <NavLink activeClassName = { Styles.active } to = { book.login }>
@@ -48,7 +54,7 @@ export default class Nav extends Component {
                 </div>
                 <button className = { Styles.hidden }>Выйти</button>
             </>
-        ;
+        );
     };
 
     _logout = () => {
@@ -67,7 +73,7 @@ export default class Nav extends Component {
         return (
             <section className = { Styles.navigation }>
                 <div className = { statusStyle }>
-                    <div>{isOnline ? 'Онлайн' : 'Офлайн'}</div>
+                    <div>{isOnline ? "Онлайн" : "Офлайн"}</div>
                     <span />
                 </div>
                 {navigation}
