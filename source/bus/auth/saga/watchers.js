@@ -5,12 +5,12 @@ import { takeEvery, all, call } from "redux-saga/effects";
 import { types } from "../types";
 
 // Workers
-import { worker } from "./workers";
+import { signup } from "./workers";
 
-function* watchWorker () {
-    yield takeEvery(types.TYPE, worker);
+function* watchSignup () {
+    yield takeEvery(types.SIGNUP_ASYNC, signup);
 }
 
-export function* watchDomain () {
-    yield all([call(watchWorker)]);
+export function* watchAuth () {
+    yield all([call(watchSignup)]);
 }
