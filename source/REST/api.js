@@ -33,6 +33,14 @@ export const api = {
                 body: JSON.stringify({ token: this.token }),
             });
         },
+        logout () {
+            return fetch(`${MAIN_URL}/user/logout`, {
+                method:  "GET",
+                headers: {
+                    Authorization: this.token,
+                },
+            });
+        },
     },
     posts: {
         fetch () {
