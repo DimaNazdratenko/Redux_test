@@ -22,4 +22,9 @@ export const authActions = {
             payload: userData,
         };
     },
+    authenticateAsync: () => {
+        return {
+            type: types.AUTHENTICATE_ASYNC,
+        };
+    },
 };
