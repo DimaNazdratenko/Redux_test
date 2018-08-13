@@ -17,7 +17,7 @@ export const postsActions = {
     },
     clearPosts: () => {
         return {
-            type: types.CLEAR_POST,
+            type: types.CLEAR_POSTS,
         };
     },
 
