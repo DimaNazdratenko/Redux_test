@@ -8,6 +8,11 @@ export const authActions = {
             type: types.AUTHENTICATE,
         };
     },
+    initialize: () => {
+        return {
+            type: types.INITIALIZE,
+        };
+    },
 
     // Async
     signupAsync: (userData) => {
@@ -25,6 +30,11 @@ export const authActions = {
     authenticateAsync: () => {
         return {
             type: types.AUTHENTICATE_ASYNC,
+        };
+    },
+    initializeAsync: () => {
+        return {
+            type: types.INITIALIZE_ASYNC,
         };
     },
 };
