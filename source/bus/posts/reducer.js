@@ -40,8 +40,7 @@ export const postsReducer = (state = initialState, action) => {
                 ],
                 (likes) => {
                     return likes.filter(
-                        (like) =>
-                            like.get("id") !== action.payload.liker.get("id")
+                        (like) => like.get("id") !== action.payload.userId
                     );
                 }
             );
