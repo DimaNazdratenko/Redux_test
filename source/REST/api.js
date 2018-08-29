@@ -79,6 +79,18 @@ export const api = {
             });
         },
     },
+    profile: {
+        updateProfile (profileInfo) {
+            return fetch(`${MAIN_URL}/user`, {
+                method:  "PUT",
+                headers: {
+                    Authorization:  this.token,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(profileInfo),
+            });
+        },
+    },
     users: {
         fetch () {
             return fetch(`${MAIN_URL}/user/all`, {
