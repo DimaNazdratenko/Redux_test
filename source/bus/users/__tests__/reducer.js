@@ -16,7 +16,7 @@ describe("auth reducer:", () => {
 
     test("should handle FILL_USERS action", () => {
         expect(usersReducer(void 0, usersActions.fillUsers(__.users))).toEqual(
-            fromJS(usersActions.fillUsers(__.users).payload)
+            fromJS(__.users)
         );
     });
 
