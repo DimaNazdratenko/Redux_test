@@ -6,7 +6,6 @@ import { authReducer } from "../reducer";
 
 // Actions
 import { authActions } from "../actions";
-import { types } from "../types";
 
 const initialState = Map({
     isAuthenticated: false,
