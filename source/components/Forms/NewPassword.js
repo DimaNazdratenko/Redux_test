@@ -1,23 +1,32 @@
 // Core
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Formik, Form, Field } from 'formik';
-import cx from 'classnames';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { Formik, Form, Field } from "formik";
+import cx from "classnames";
 
 // Instruments
-import Styles from './styles.m.css';
-import { newPassword } from '../../bus/forms/shapes';
-import { book } from '../../navigation/book';
+import Styles from "./styles.m.css";
+import { newPassword } from "../../bus/forms/shapes";
+import { book } from "../../navigation/book";
 
-export default class NewPassword extends Component {
-    static defaultProps = {
-        // State
-        isFetching: false,
+// Actions
+import { profileActions } from "../../bus/profile/actions";
 
-        // Actions
-        updatePasswordAsync: () => {},
+const mapStateToProps = (state) => {
+    return {
+        isFetching: state.ui.get("isFetching"),
+        profile:    state.profile,
     };
+};
 
+const mapDispatchToProps = profileActions;
+
+@connect(
+    mapStateToProps,
+    mapDispatchToProps
+)
+export default class NewPassword extends Component {
     _submitPassword = (passwordData) => {
         const { updatePasswordAsync } = this.props;
 
@@ -33,20 +42,32 @@ export default class NewPassword extends Component {
                 render = { (props) => {
                     const { isValid, touched, errors } = props;
 
-                    const newPasswordFormWrapperStyles = cx(Styles.newPasswordFormWrapper, Styles.wrapper, {
-                        [Styles.disabledInput]: isFetching,
-                    });
+                    const newPasswordFormWrapperStyles = cx(
+                        Styles.newPasswordFormWrapper,
+                        Styles.wrapper,
+                        {
+                            [Styles.disabledInput]: isFetching,
+                        }
+                    );
                     const oldPasswordStyle = cx({
-                        [Styles.invalidInput]: !isValid && touched.oldPassword && errors.oldPassword,
+                        [Styles.invalidInput]:
+                            !isValid &&
+                            touched.oldPassword &&
+                            errors.oldPassword,
                     });
                     const newPasswordStyle = cx({
-                        [Styles.invalidInput]: !isValid && touched.newPassword && errors.newPassword,
+                        [Styles.invalidInput]:
+                            !isValid &&
+                            touched.newPassword &&
+                            errors.newPassword,
                     });
 
                     const buttonStyle = cx(Styles.loginSubmit, {
                         [Styles.disabledButton]: isFetching,
                     });
-                    const buttonMessage = isFetching ? 'Загрузка...' : 'Сменить пароль';
+                    const buttonMessage = isFetching
+                        ? "Загрузка..."
+                        : "Сменить пароль";
 
                     return (
                         <Form className = { Styles.form }>
