@@ -9,7 +9,7 @@ import { usersActions } from "../actions";
 
 const initialState = List();
 
-describe("auth reducer:", () => {
+describe("users reducer:", () => {
     test("should return initial state by default", () => {
         expect(usersReducer(void 0, {})).toEqual(initialState);
     });
