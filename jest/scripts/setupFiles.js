@@ -59,6 +59,11 @@ const fetchResponseSuccess = {
     json:   jest.fn(() => Promise.resolve(responseDataSuccess)),
 };
 
+const fetchResponseSuccess204 = {
+    status: 204,
+    json:   jest.fn(() => Promise.resolve(responseDataSuccess)),
+};
+
 const fetchResponseFail401 = {
     status: 401,
     json:   jest.fn(() => Promise.resolve(responseDataFail)),
@@ -80,7 +85,7 @@ const newAvatar = ["avatar"];
 
 const newPassword = {
     oldPassword: 12345,
-    newPassword:    123456,
+    newPassword: 123456,
 };
 
 global.__ = {
@@ -92,6 +97,7 @@ global.__ = {
     responseDataSuccess,
     responseDataFail,
     fetchResponseSuccess,
+    fetchResponseSuccess204,
     fetchResponseFail401,
     fetchResponseFail400,
     credentials,
